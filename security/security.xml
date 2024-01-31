@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<odoo>
+  <data>
+    <!-- GRUPO ADMINISTRADOR DE EMPRESAS -->
+    <record id="grupo_administrador" model="res.groups">
+      <field name="name">Proyecto_Javier/Administrador</field>
+      <field name="comment">Perfil administrador</field>
+    </record>
+
+    <record id="grupo_jefe_proyectos" model="res.groups">
+      <field name="name">Proyecto_Javier/Jefe de proyectos</field>
+      <field name="comment">Perfil de jefe de proyectos</field>
+    </record>
+
+    <record id="grupo_analistas" model="res.groups">
+      <field name="name">Proyecto_Javier/Analista</field>
+      <field name="comment">Perfil de analista</field>
+    </record>
+
+    <record id="grupo_programadores" model="res.groups">
+      <field name="name">Proyecto_Javier/Programador</field>
+      <field name="comment">Perfil de programador</field>
+    </record>
+
+    <record id="base.user_admin" model="res.users">
+      <field name="groups_id" eval="[(4,ref('grupo_administrador'))]"/>
+    </record>
+  </data>
+</odoo>

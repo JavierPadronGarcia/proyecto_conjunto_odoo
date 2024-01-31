@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+  <!-- REGLAS DE REGISTRO -->
+  <record model="ir.rule" id="tareas_por_programadores">
+    <field name="name">Programador solo puede acceder a sus tareas</field>
+    <field name="model_id" ref="model_project_task" />
+    <field name="domain_force">[('user_ids', 'in', user.id)]</field>
+    <field name="groups" eval="[(4,ref('grupo_programadores'))]" />
+  </record>
+</odoo>

@@ -1,0 +1,145 @@
+<odoo>
+  <data>
+    <!-- explicit list view definition -->
+
+
+    <!-- Empresas_contratadoras views -->
+    <record model="ir.ui.view" id="proyecto_javier.empresas_contratadoras_tree">
+      <field name="name">proyecto_javier.empresas_contratadoras.tree</field>
+      <field name="model">proyecto_javier.empresas_contratadoras</field>
+      <field name="arch" type="xml">
+        <tree>
+          <field name="name" />
+          <field name="contact_name" />
+          <field name="email" />
+          <field name="phone" />
+          <field name="address1" />
+          <field name="address2" />
+          <field name="employees_number" />
+          <field name="business_type" />
+        </tree>
+      </field>
+    </record>
+
+    <record model="ir.ui.view" id="proyecto_javier.empresas_contratadoras_form">
+      <field name="name">proyecto_javier.empresas_contratadoras.form</field>
+      <field name="model">proyecto_javier.empresas_contratadoras</field>
+      <field name="arch" type="xml">
+        <form>
+          <group colspan="2" col="2">
+            <field name="name" />
+            <field name="contact_name" />
+            <field name="email" />
+            <field name="phone" />
+            <field name="address1" />
+            <field name="address2" />
+            <field name="employees_number" />
+            <field name="business_type" />
+            <field name="proyect_ids">
+              <tree>
+                <field name="name" />
+                <field name="date_start" />
+                <field name="user_id" />
+              </tree>
+            </field>
+          </group>
+        </form>
+      </field>
+    </record>
+
+    <record id="project_project_extend" model="ir.ui.view">
+      <field name="name">project.project.extended</field>
+      <field name="model">project.project</field>
+      <field name="inherit_id" ref="project.edit_project" />
+      <field name="arch" type="xml">
+        <field name="user_id" position="after">
+          <field name="empresa_contratadora_id" />
+        </field>
+        <xpath expr="//page" position="after">
+          <page string='Tareas' name='Tareas'>
+            <field name='tasks_ids' />
+          </page>
+        </xpath>
+      </field>
+    </record>
+
+    <!-- Empresas_contratadoras actions -->
+    <record model="ir.actions.act_window" id="proyecto_javier.empresas_contratadoras_action_window">
+      <field name="name">Empresas contratadoras</field>
+      <field name="res_model">proyecto_javier.empresas_contratadoras</field>
+      <field name="view_mode">tree,form</field>
+    </record>
+
+    <record model="ir.actions.act_window" id="project_action_window">
+      <field name="name">Proyectos</field>
+      <field name="res_model">project.project</field>
+      <field name="view_mode">kanban,tree,form</field>
+    </record>
+
+    <record model="ir.actions.act_window" id="project_task_action_window">
+      <field name="name">Tareas</field>
+      <field name="res_model">project.task</field>
+      <field name="view_mode">tree,form</field>
+    </record>
+
+    <!-- Empresas_contratadoras menu actions -->
+
+    <!-- Menú principal -->
+    <menuitem name="Empresas Contratadoras" id="proyecto_javier.menu_root" />
+
+    <!-- Submenú -->
+    <menuitem name="Empresas Contratadoras" id="proyecto_javier.empresas_contratadoras_menu"
+      parent="proyecto_javier.menu_root"
+      action="proyecto_javier.empresas_contratadoras_action_window" />
+
+    <menuitem name="Proyectos" id="proyecto_javier.proyect_menu"
+      parent="proyecto_javier.menu_root"
+      action="project_action_window" />
+
+    <menuitem name="Tareas" id="proyecto_javier.project_task"
+      parent="proyecto_javier.menu_root"
+      action="project_task_action_window" />
+
+    <!-- actions opening views on models -->
+    <!--
+    <record model="ir.actions.act_window" id="proyecto_javier.action_window">
+      <field name="name">proyecto_javier window</field>
+      <field name="res_model">proyecto_javier.proyecto_javier</field>
+      <field name="view_mode">tree,form</field>
+    </record>
+-->
+
+    <!-- server action to the one above -->
+    <!--
+    <record model="ir.actions.server" id="proyecto_javier.action_server">
+      <field name="name">proyecto_javier server</field>
+      <field name="model_id" ref="model_proyecto_javier_proyecto_javier"/>
+      <field name="state">code</field>
+      <field name="code">
+        action = {
+          "type": "ir.actions.act_window",
+          "view_mode": "tree,form",
+          "res_model": model._name,
+        }
+      </field>
+    </record>
+-->
+
+    <!-- Top menu item -->
+    <!--
+    <menuitem name="proyecto_javier" id="proyecto_javier.menu_root"/>
+-->
+    <!-- menu categories -->
+    <!--
+    <menuitem name="Menu 1" id="proyecto_javier.menu_1" parent="proyecto_javier.menu_root"/>
+    <menuitem name="Menu 2" id="proyecto_javier.menu_2" parent="proyecto_javier.menu_root"/>
+-->
+    <!-- actions -->
+    <!--
+    <menuitem name="List" id="proyecto_javier.menu_1_list" parent="proyecto_javier.menu_1"
+              action="proyecto_javier.action_window"/>
+    <menuitem name="Server to list" id="proyecto_javier" parent="proyecto_javier.menu_2"
+              action="proyecto_javier.action_server"/>
+-->
+  </data>
+</odoo>
