@@ -83,7 +83,11 @@
                 <div class="o_setting_right_pane">
                   <span class="o_form_label">Contract Type</span>
                   <div class="text-muted content-group mt16">
-                    <field name="contract_type" placeholder="hola" />
+                    <field name="phone_code" placeholder="Prefijo teléfono" />
+                    <div>
+                      Mostrar Tipo de empresa:
+                      <field name="show_business_type" />
+                    </div>
                   </div>
                 </div>
               </div>

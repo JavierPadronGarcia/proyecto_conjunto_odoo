@@ -42,10 +42,12 @@ class ProjecTask(models.Model):
 
 class ResConfigSettings(models.TransientModel):
     _inherit = 'res.config.settings'
-    contract_type = fields.Selection(
-        [('monthly', 'Monthly'), ('half_yearly', '6 Months'), ('yearly', 'Yearly')],
-        string="Contract Type",
-        config_parameter='employee_contract.contract_type',
-        help="Select contract type from the selection field"
+    phone_code = fields.Selection(
+        [('+32', 'Bélgica'), ('+33', 'Francia'), ('+34', 'España')],
+        string="Phone code",
+        config_parameter='employee_contract.phone_code',
+        help="Select phone code from the selection field"
     )
+    # add checkbox es to show/hide some fields on forms and views 
+    show_business_type = fields.Boolean('business_type')
 
