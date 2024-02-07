@@ -40,4 +40,12 @@ class ProjecTask(models.Model):
 
     stage_id = fields.Many2one('project.task.type', string='Etapa')
 
+class ResConfigSettings(models.TransientModel):
+    _inherit = 'res.config.settings'
+    contract_type = fields.Selection(
+        [('monthly', 'Monthly'), ('half_yearly', '6 Months'), ('yearly', 'Yearly')],
+        string="Contract Type",
+        config_parameter='employee_contract.contract_type',
+        help="Select contract type from the selection field"
+    )
 
