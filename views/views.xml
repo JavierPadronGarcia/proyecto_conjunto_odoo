@@ -30,11 +30,13 @@
             <field name="name" />
             <field name="contact_name" />
             <field name="email" />
-            <field name="phone" />
+            <field class="oe_inline" name="phone_code" placeholder="Phone Code" readonly="1" />
+            <field name="phone" placeholder="Phone Number" />
+            <field name='show_business_type' invisible='1' />
             <field name="address1" />
             <field name="address2" />
             <field name="employees_number" />
-            <field name="business_type" />
+            <field name="business_type" attrs="{'invisible': [('show_business_type', '=', False)]}" />
             <field name="proyect_ids">
               <tree>
                 <field name="name" />
@@ -63,10 +65,23 @@
       </field>
     </record>
 
-    <record id="res_config_settings_view_form" model="ir.ui.view">
-      <field name="name">
-        res.config.settings.view.form.inherit.proyecto_javier
+    <record model="ir.ui.view" id="view_registro_empresa_contratadora_tree">
+      <field name="name">Registro Empresa Contratadora Tree</field>
+      <field name="model">registro.empresa_contratadora</field>
+      <field name="arch" type="xml">
+        <tree>
+          <field name="accion"/>
+          <field name="nombre_usuario" />
+          <field name="nombre_empresa" />
+          <field name="fecha_hora_creacion" />
+          <field name="fecha_hora_accion" />
+          <field name="empresa_contratadora_id" />
+        </tree>
       </field>
+    </record>
+
+    <record id="res_config_settings_view_form" model="ir.ui.view">
+      <field name="name">res.config.settings.view.form.inherit.proyecto_javier</field>
       <field name="model">res.config.settings</field>
       <field name="priority" eval="15" />
       <field name="inherit_id" ref="base.res_config_settings_view_form" />
@@ -84,9 +99,7 @@
                   <span class="o_form_label">Contract Type</span>
                   <div class="text-muted content-group mt16">
                     <field name="phone_code" placeholder="Prefijo teléfono" />
-                    <div>
-                      Mostrar Tipo de empresa:
-                      <field name="show_business_type" />
+                    <div>Mostrar Tipo de empresa: <field name="show_business_type" />
                     </div>
                   </div>
                 </div>
@@ -96,6 +109,7 @@
         </xpath>
       </field>
     </record>
+
 
     <!-- Empresas_contratadoras actions -->
     <record model="ir.actions.act_window" id="proyecto_javier.empresas_contratadoras_action_window">
@@ -123,6 +137,22 @@
       <field name="view_mode">form</field>
       <field name="context">{'module' : 'proyecto_javier'}</field>
     </record>
+
+    <record id="action_registro_empresa_contratadora_tree" model="ir.actions.act_window">
+      <field name="name">Registro Empresa Contratadora</field>
+      <field name="res_model">registro.empresa_contratadora</field>
+      <field name="view_mode">tree</field>
+      <field name="view_id" ref="view_registro_empresa_contratadora_tree" />
+      <field name="context">{}</field>
+    </record>
+
+    <!-- Define el elemento de menú en el ajuste -->
+    <menuitem id="menu_registro_empresa_contratadora_tree"
+      name="Registro Empresa Contratadora"
+      parent="base.menu_administration"
+      action="action_registro_empresa_contratadora_tree"
+      sequence="30" />
+
 
     <!-- Empresas_contratadoras menu actions -->
 

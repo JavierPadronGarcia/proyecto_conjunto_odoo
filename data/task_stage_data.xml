@@ -22,5 +22,6 @@
     <record id="project_tags_done" model="project.tags">
       <field name="name">Done</field>
     </record>
+
   </data>
 </odoo>
