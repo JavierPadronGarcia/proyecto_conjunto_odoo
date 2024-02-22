@@ -94,21 +94,6 @@ class ResConfigSettings(models.TransientModel):
         config_parameter='proyecto_javier.show_business_type',
         help="Casilla de verificación para mostrar/ocultar algunos campos en formularios y vistas"
     )
-
-    company_info = fields.One2many('registro.empresa_contratadora', compute='_compute_company_info')
-
-    @api.depends('show_business_type')
-    def _compute_company_info(self):
-        for record in self:
-            companies = self.env['registro.empresa_contratadora'].sudo().search([])
-            record.company_info = [(0, 0, {
-                'accion': company.accion,
-                'nombre_empresa': company.nombre_empresa,
-                'nombre_usuario': company.nombre_usuario,
-                'fecha_hora_creacion': company.fecha_hora_creacion,
-                'fecha_hora_accion': company.fecha_hora_accion,
-            }) for company in companies]
-
 class RegistroEmpresaContratadora(models.Model):
     _name = 'registro.empresa_contratadora'
     _description = 'registro.empresa_contratadora'
